@@ -1,1 +1,99 @@
-index.html
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For You 💌</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;overflow:hidden;
+ display:flex;align-items:center;justify-content:center;
+ font-family:Arial,sans-serif;color:white;text-align:center;
+ background:radial-gradient(circle at top,#54213f,#190e20 70%);
+}
+.heart{position:fixed;bottom:-30px;animation:up 6s linear infinite;pointer-events:none}
+@keyframes up{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+.card{
+ width:90%;max-width:390px;padding:30px 23px;
+ border:1px solid #ffffff30;border-radius:25px;
+ background:#ffffff10;backdrop-filter:blur(12px);
+ box-shadow:0 15px 60px #0005;
+}
+.envelope{font-size:75px;animation:bounce 1.6s infinite}
+@keyframes bounce{50%{transform:translateY(-9px) rotate(4deg)}}
+h1{color:#ff9fc7;font-size:28px}
+p{line-height:1.8;color:#ffeaf3}
+button{
+ border:0;border-radius:30px;padding:14px 22px;
+ margin:8px;background:#ff70a9;color:white;
+ font-size:15px;font-weight:bold;cursor:pointer;
+ box-shadow:0 5px 20px #ff70a955;
+}
+button:active{transform:scale(.95)}
+#message{display:none;animation:fade .8s}
+@keyframes fade{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.small{font-size:12px;color:#d9b9cb}
+</style>
+</head>
+<body>
+<div class="card">
+ <div class="envelope">💌</div>
+ <h1>Hei, kamu cantik! 🫣</h1>
+ <p>Aku punya sesuatu buat kamu...<br>
+ Tapi kamu harus berani buka dulu nih 😏💕</p>
+ <button onclick="openGift()">Buka kejutan 💗</button>
+ <div id="message">
+  <h1>Hehehe, ketahuan! ❤️</h1>
+  <p>
+   Sebenernya aku cuma mau bilang...<br>
+   kamu itu punya cara sendiri buat bikin aku senyum. 🥹<br><br>
+   Kadang bikin salting, kadang bikin kangen,
+   pokoknya ada aja yang bikin kepikiran kamu. 🙈💕<br><br>
+   Jadi, boleh nggak aku ganggu kamu sedikit lebih lama? 😚
+  </p>
+  <button onclick="yes()">Boleh dong 🫶</button>
+  <button onclick="no()">Ih apaan sih 🙈</button>
+  <p id="reply"></p>
+ </div>
+ <p class="small">Made with 💗 just for you</p>
+</div>
+<script>
+function openGift(){
+ document.getElementById('message').style.display='block';
+ document.querySelector('.envelope').textContent='💝';
+}
+function yes(){
+ document.getElementById('reply').textContent=
+ 'YAYYY! Sekarang senyum dulu buat aku 😚💗';
+ burst();
+}
+function no(){
+ document.getElementById('reply').textContent=
+ 'Wkwkwk malu yaaa? Ketahuan deh 🙈❤️';
+ burst();
+}
+function burst(){
+ for(let i=0;i<25;i++){
+  let h=document.createElement('div');
+  h.textContent=['💗','💕','💖','❤️','✨'][Math.floor(Math.random()*5)];
+  h.style.cssText='position:fixed;left:'+Math.random()*100+
+  'vw;top:'+Math.random()*100+'vh;font-size:24px;pointer-events:none;z-index:9';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1800);
+ }
+}
+setInterval(()=>{
+ let h=document.createElement('div');
+ h.className='heart';
+ h.textContent=['💗','💕','💖','❤️'][Math.floor(Math.random()*4)];
+ h.style.left=Math.random()*100+'vw';
+ h.style.fontSize=(16+Math.random()*22)+'px';
+ h.style.animationDuration=(4+Math.random()*4)+'s';
+ document.body.appendChild(h);
+ setTimeout(()=>h.remove(),8000);
+},350);
+</script>
+</body>
+</html>
